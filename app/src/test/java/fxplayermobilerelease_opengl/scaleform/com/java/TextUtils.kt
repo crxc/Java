@@ -10,9 +10,9 @@ import java.util.regex.Pattern
  * See [testing documentation](http://d.andR.string.com/tools/testing).
  */
 class TextUtils {
-    val path = "D:\\ceshi"
-    val output = "D:\\git_demo_project\\Java\\app\\src\\main\\res\\values\\strings.xml"
-    val cache = "D:\\cache"
+    val path = "/home/crxc/Android/gitProject/MediConCenDoctor_Android/base/src/main/java/com/yijie/crxc/base/api"
+    val output = "/home/crxc/Android/gitProject/MediConCenDoctor_Android/base/src/main/res/values/strings.xml"
+    val cache = "/home/crxc/cache"
 
     data class Bean(val path: String, val prefix: String)
     data class StringBean(val string: String, val id: String)
@@ -20,7 +20,7 @@ class TextUtils {
     private var list: ArrayList<Bean> = ArrayList()
 
     init {
-        list.add(Bean(path, "main"))
+        list.add(Bean(path, "base"))
     }
 
     private var map: HashMap<String, Int> = HashMap()
@@ -51,7 +51,7 @@ class TextUtils {
 
     private fun repairOutPutFile() {
         val reader = BufferedReader(FileReader(outFile))
-        val backupFile = File("$cache\\${outFile.name}")
+        val backupFile = File("$cache/${outFile.name}")
         val writer = BufferedWriter(FileWriter(backupFile))
         var line: String? = ""
         while (reader.readLine().also { line = it } != null) {
@@ -69,14 +69,15 @@ class TextUtils {
     val regex = "\"[^\"]*?[\\u4e00-\\u9fa5]+[^\"]*?\""
     private val pattern = Pattern.compile(regex)
     private val outFile = File(output)
-    private val template = "activity.getResources().getString"
+    private val template = "fetchString"
 
     // "测试文字" "测试文字" "测试文字"
     private fun analyze(file: File, prefix: String) {
         var reader: BufferedReader? = null
         var writer: BufferedWriter? = null
         var backupsWriter: BufferedWriter? = null
-        val backupFile = File("$cache\\${file.name}")
+        val backupFile = File("$cache/${file.name}")
+        var num = 0
         try {
             reader = BufferedReader(FileReader(file))
             writer = BufferedWriter(FileWriter(outFile, true))
@@ -84,12 +85,17 @@ class TextUtils {
 
             while (true) {
                 var s = reader.readLine() ?: break
+                num++
+                if (num == 2) {
+//                    backupsWriter.write("import com.yijie.crxc.yijie.utils.MyStringUtils;")
+//                    backupsWriter.newLine()
+                }
                 val find = HashSet<String>()
                 val matcher = pattern.matcher(s)
                 while (matcher.find()) {
                     val group = matcher.group()
                     println("find$group")
-                    find.add(group.replace("\"", ""))
+                    find.add(group.replace("", ""))
                 }
                 if (find.isEmpty()) {
                     backupsWriter.write(s)
@@ -111,7 +117,7 @@ class TextUtils {
                                     )
                                 }
                                 file.name.endsWith("xml") -> {
-                                    s = s.replace(it, "R.string.$prefix${stringBeanIn.id}")
+                                    s = s.replace(it, "\"@string/$prefix${stringBeanIn.id}\"")
                                 }
                             }
                         } else {
@@ -126,10 +132,10 @@ class TextUtils {
                                     )
                                 }
                                 file.name.endsWith("kt") -> {
-                                    s = s.replace(it, "activity.resources.getString(R.string.$prefix$fetchIndex)")
+                                    s = s.replace(it, "$template(R.string.$prefix$fetchIndex)")
                                 }
                                 file.name.endsWith("xml") -> {
-                                    s = s.replace(it, "R.string.$prefix$fetchIndex")
+                                    s = s.replace(it, "\"@string/$prefix$fetchIndex\"")
                                 }
                             }
                             stringMap[prefix]!!.add(StringBean(it, fetchIndex))
