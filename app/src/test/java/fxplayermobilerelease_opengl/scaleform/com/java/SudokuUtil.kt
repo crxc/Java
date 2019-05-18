@@ -58,39 +58,38 @@ class SudokuUtil {
 
     private fun initMap() {
         map[Position(1, 1)] = 6
-        map[Position(1, 3)] = 8
-        map[Position(1, 6)] = 9
-        map[Position(1, 7)] = 7
-        map[Position(2, 2)] = 9
-        map[Position(2, 6)] = 2
-        map[Position(2, 8)] = 6
+        map[Position(1, 5)] = 5
+        map[Position(1, 6)] = 2
+        map[Position(2, 2)] = 5
+        map[Position(2, 4)] = 3
         map[Position(2, 9)] = 1
-        map[Position(3, 5)] = 3
-        map[Position(3, 8)] = 4
+        map[Position(3, 4)] = 7
+        map[Position(3, 6)] = 8
+        map[Position(3, 8)] = 5
         map[Position(3, 9)] = 2
-        map[Position(4, 3)] = 6
-        map[Position(4, 9)] = 7
-        map[Position(5, 2)] = 3
-        map[Position(5, 4)] = 9
-        map[Position(5, 6)] = 5
-        map[Position(5, 8)] = 1
-        map[Position(6, 1)] = 9
-        map[Position(6, 7)] = 5
-        map[Position(7, 1)] = 5
-        map[Position(7, 2)] = 8
-        map[Position(7, 5)] = 4
-        map[Position(8, 1)] = 2
-        map[Position(8, 2)] = 1
-        map[Position(8, 4)] = 5
-        map[Position(8, 8)] = 8
-        map[Position(9, 3)] = 7
-        map[Position(9, 4)] = 3
-        map[Position(9, 7)] = 2
+        map[Position(4, 2)] = 7
+        map[Position(4, 7)] = 4
+        map[Position(5, 1)] = 8
+        map[Position(5, 2)] = 6
+        map[Position(5, 8)] = 3
+        map[Position(5, 9)] = 5
+        map[Position(6, 3)] = 2
+        map[Position(6, 8)] = 8
+        map[Position(7, 1)] = 9
+        map[Position(7, 2)] = 4
+        map[Position(7, 4)] = 6
+        map[Position(7, 6)] = 1
+        map[Position(8, 1)] = 7
+        map[Position(8, 6)] = 3
+        map[Position(8, 8)] = 4
+        map[Position(9, 4)] = 4
+        map[Position(9, 5)] = 7
         map[Position(9, 9)] = 9
     }
 
     @Test
     fun main(): Unit {
+//        printMap()
         (1..100).forEach {
             (1..100).forEach {
                 start()
