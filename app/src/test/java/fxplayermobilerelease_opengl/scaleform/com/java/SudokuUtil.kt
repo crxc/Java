@@ -1,6 +1,5 @@
 package fxplayermobilerelease_opengl.scaleform.com.java
 
-import android.arch.lifecycle.Transformations.map
 import org.junit.Test
 import java.lang.StringBuilder
 import java.util.*

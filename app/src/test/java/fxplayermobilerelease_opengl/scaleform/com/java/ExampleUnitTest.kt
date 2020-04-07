@@ -12,6 +12,11 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        (1..1000).forEach {
+            Thread {
+                println(it)
+            }.start()
+        }
+        Thread.sleep(1000)
     }
 }

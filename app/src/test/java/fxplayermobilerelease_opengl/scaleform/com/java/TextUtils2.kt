@@ -10,7 +10,7 @@ import java.util.regex.Pattern
  * See [testing documentation](http://d.andR.string.com/tools/testing).
  */
 class TextUtils2 {
-    val path = "/home/crxc/Android/project/project/svn/andriod/wanpingmarket/app/src/main/java/com/market/wanping"
+    val path = "/home/crxc/Android/project/project/svn/andriod/wanpingmarket"
     val output = "/home/crxc/code.txt"
     val cache = "/home/crxc/cache"
 
@@ -50,7 +50,7 @@ class TextUtils2 {
             while (true) {
                 val s = reader.readLine() ?: break
                 num++
-                if(s.isNotEmpty()){
+                if(s.replace(" ","").isNotEmpty()){
                     writer.write(s)
                     writer.newLine()
                 }
